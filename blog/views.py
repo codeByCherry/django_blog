@@ -1,5 +1,6 @@
-from django.shortcuts import render
 from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render
 
 from .models import Post
 
@@ -15,3 +16,16 @@ def index(request):
     )
 
     return render(request, 'blog/index.html', context=context)
+
+
+def detail(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+
+    if post.is_delete:
+        return HttpResponse("This post has been deleted!")
+
+    context = dict(
+        post=post,
+    )
+
+    return render(request, 'blog/detail.html', context=context )

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 from django.utils import timezone
 
 # Create your models here.
@@ -39,6 +40,10 @@ class Post(models.Model):
     def delete(self, using=None, keep_parents=False):
         self.is_delete = True
         self.save()
+
+    def get_absolute_url(self):
+        absolute_url = reverse('blog:detail', kwargs={'post_id':self.id})
+        return absolute_url
 
     def __str__(self):
         return self.title
