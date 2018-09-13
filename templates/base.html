@@ -1,4 +1,5 @@
 {% load staticfiles %}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -75,16 +76,18 @@
                 {% endblock toc %}
                 <div class="widget widget-recent-posts">
                     <h3 class="widget-title">最新文章</h3>
+                    {% load blog_tags %}
+                    <!--get_recent_posts 可以传入一个数字作为 num 的参数-->
+                    <!-- 详情可以查看 get_recent_post 的函数定义-->
+                    {% get_recent_posts 2 as recent_post_list %}
                     <ul>
+                        {% for post in recent_post_list %}
                         <li>
-                            <a href="#">Django 博客开发入门教程：前言</a>
+                            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
                         </li>
-                        <li>
-                            <a href="#">Django 博客使用 Markdown 自动生成文章目录</a>
-                        </li>
-                        <li>
-                            <a href="#">部署 Django 博客</a>
-                        </li>
+                        {% empty %}
+                        暂时没有发表文章!
+                        {% endfor %}
                     </ul>
                 </div>
                 <div class="widget widget-archives">
