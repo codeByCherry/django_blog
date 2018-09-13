@@ -8,7 +8,7 @@ from .models import Post
 def index(request):
 
     # 最新的 post 在前面显示
-    post_list = Post.objects.all().order_by('-created_time')
+    post_list = Post.objects.all().filter(is_delete=False).order_by('-created_time')
 
     context = dict(
         post_list=post_list,
