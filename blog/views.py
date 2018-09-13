@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 
 from .models import Post
-
+import markdown
 
 # Create your views here.
 def index(request):
@@ -24,6 +24,14 @@ def detail(request, post_id):
     if post.is_delete:
         return HttpResponse("This post has been deleted!")
 
+    post.body = markdown.markdown(
+        post.body,
+        extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite',
+            'markdown.extensions.toc',
+        ]
+    )
     context = dict(
         post=post,
     )
