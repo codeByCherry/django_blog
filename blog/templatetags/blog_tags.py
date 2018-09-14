@@ -1,7 +1,6 @@
 # 编写自定义标签 {% get_recent_posts as recent_post_list %}
 from ..models import Post
 from ..models import Category
-
 from django import template
 
 
@@ -10,9 +9,7 @@ register = template.Library()
 # 这里处理编写 get_recent_posts 函数，其他都是套路
 @register.simple_tag
 def get_recent_posts(num=5):
-    return Post.objects.all().order_by('-created_time')[:num]
-
-
+    return Post.objects.all().filter(is_delete=False).order_by('-created_time')[:num]
 
 
 '''

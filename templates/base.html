@@ -92,31 +92,25 @@
                 </div>
                 <div class="widget widget-archives">
                     <h3 class="widget-title">归档</h3>
+                    {% archives as archive_list %}
                     <ul>
-                        <li>
-                            <a href="#">2017 年 5 月</a>
-                        </li>
-                        <li>
-                            <a href="#">2017 年 4 月</a>
-                        </li>
-                        <li>
-                            <a href="#">2017 年 3 月</a>
-                        </li>
+                        {% for archive in archive_list %}
+                        <a href="#">{{ archive }}</a>
+                        {% empty %}
+                        <li>没有归档内容</li>
+                        {% endfor %}
                     </ul>
                 </div>
 
                 <div class="widget widget-category">
                     <h3 class="widget-title">分类</h3>
+
+                    {% get_categories as category_list %}
                     <ul>
-                        <li>
-                            <a href="#">Django 博客教程 <span class="post-count">(13)</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Python 教程 <span class="post-count">(11)</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Django 用户认证 <span class="post-count">(8)</span></a>
-                        </li>
+                        {% for category in category_list %}
+                        <li><a href="#"> {{ category }} <span class="post-count">(13)</span></a></li>
+                        {% empty %}
+                        {% endfor %}
                     </ul>
                 </div>
 
