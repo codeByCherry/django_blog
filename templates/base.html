@@ -95,7 +95,7 @@
                     {% archives as archive_list %}
                     <ul>
                         {% for archive in archive_list %}
-                        <a href="#">{{ archive }}</a>
+                        <a href="{% url 'blog:archives' archive.year archive.month %}">{{ archive }}</a>
                         {% empty %}
                         <li>没有归档内容</li>
                         {% endfor %}
@@ -108,7 +108,7 @@
                     {% get_categories as category_list %}
                     <ul>
                         {% for category in category_list %}
-                        <li><a href="#"> {{ category }} <span class="post-count">(13)</span></a></li>
+                        <li><a href="{% url 'blog:category' category.id%}"> {{ category }} <span class="post-count">(13)</span></a></li>
                         {% empty %}
                         {% endfor %}
                     </ul>
